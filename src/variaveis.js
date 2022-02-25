@@ -1,5 +1,5 @@
 const variaveis = {
-    versao: '2.0.1',
+    versao: '2.0.5',
     baseFiles: 'https://aplicativomaisescola.online/fisioresp/videos/'
 };
 

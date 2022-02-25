@@ -14,6 +14,7 @@ import {
   PermissionsAndroid,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import IconAnt from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import Video from 'react-native-video';
@@ -182,7 +183,7 @@ export default function HomePaciente({navigation, route}) {
               <TouchableOpacity
                 style={styles.opcaoMenu}
                 onPress={() => navigation.replace('Evolucao')}>
-                <IconEntypo name="area-graph" size={30} color="rgba(0,128,0, 1)" />
+                <IconAnt name="barschart" size={30} color="rgba(0,128,0, 1)" />
                 <Text style={styles.opcaoMenuText}>Evolução</Text>
               </TouchableOpacity>
 

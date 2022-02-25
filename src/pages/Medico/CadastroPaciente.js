@@ -324,6 +324,7 @@ function CadastroPaciente(props) {
                 <TextInput
                   style={styles.input}
                   placeholder="Bairro"
+                  placeholderTextColor='rgba(0,0,0,0.2)'
                   defaultValue={paciente.bairro}
                   onChangeText={bairro => setPaciente({ ...paciente, bairro })}
                 />
@@ -331,13 +332,15 @@ function CadastroPaciente(props) {
                 <TextInput
                   style={styles.input}
                   placeholder="Cidade"
+                  placeholderTextColor='rgba(0,0,0,0.2)'
                   defaultValue={paciente.cidade}
-                  onChangeText={cidade => setPaciente({ ...paciente, bairro })}
+                  onChangeText={cidade => setPaciente({ ...paciente, cidade })}
                 />
 
                 <TextInput
                   style={styles.input}
                   placeholder="Estado"
+                  placeholderTextColor='rgba(0,0,0,0.2)'
                   defaultValue={paciente.estado}
                   onChangeText={estado => setPaciente({ ...paciente, estado })}
                 />

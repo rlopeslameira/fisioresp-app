@@ -18,9 +18,7 @@ export default class ChatMedico extends Component {
       paciente: props.route.params.paciente,
       socket: null,
     }
-
   }
-
 
   //io('http://megaaula.nodejs7003.uni5.net/chat/')
 
@@ -81,6 +79,7 @@ export default class ChatMedico extends Component {
     socket.disconnect();
   }
 
+
   render() {
     const { usuario, messages, loading } = this.state;
     return (
@@ -90,7 +89,7 @@ export default class ChatMedico extends Component {
         )}
         {(!loading && usuario) && (
           <GiftedChat
-            placeholder="Digite sua mensagem..."
+            placeholder="Digite sua mensagem..."            
             locale="pt-br"
             dateFormat="LLLL"
             timeFormat="LT"

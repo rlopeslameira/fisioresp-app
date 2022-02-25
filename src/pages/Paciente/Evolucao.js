@@ -71,20 +71,14 @@ export default function Evolucao({navigation, route}) {
   }, []);
 
   async function loadDay(day){
-    console.log(day);
-    setDate(new Date(day.dateString));
+    setDate(new Date(day.dateString + 'T06:00:00'));
     addDate(day.dateString);
-    console.log({
-      paciente: paciente.id,
-      data: day.dateString
-    });
     const evolucao_dia = await api.get('/paciente/evolucao/load', {
       params: {
         paciente: paciente.id,
         data: day.dateString
       }
     });
-    console.log(evolucao_dia.data);
     setDetalhes(evolucao_dia.data.length > 0 ? evolucao_dia.data : null);
 
   }

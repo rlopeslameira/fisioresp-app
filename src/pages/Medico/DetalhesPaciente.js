@@ -268,7 +268,7 @@ export default function DetalhesPaciente({ navigation, route }) {
                         onError={error => console.log(error)} 
                         controls={false}
                         audioOnly={true}
-                        repeat={true}
+                        repeat={false}
                       />
                     )}
                     <View style={{ marginTop: 10, }}>

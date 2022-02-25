@@ -277,6 +277,11 @@ export default function IniciarExercicios({ navigation, route }) {
                       <Text style={{ color: 'rgba(0,128,0, 1)', flex: 1, fontSize: 18, textAlign: "center", marginBottom: 10,}}>
                         do objetivo.
                       </Text>
+                      <TouchableOpacity 
+                      onPress={() => iniciarExercicio(true, item)}
+                      style={styles.btn}>
+                        <Text style={{color: '#000'}}>Alterar</Text>
+                      </TouchableOpacity>
                     </>
                   ) : (
                     <TouchableOpacity 
@@ -332,7 +337,7 @@ export default function IniciarExercicios({ navigation, route }) {
                       onError={error => console.log(error)} 
                       controls={false}
                       audioOnly={true}
-                      repeat={true}
+                      repeat={false}
                     />
                   )}
                   {selectedItem && (
