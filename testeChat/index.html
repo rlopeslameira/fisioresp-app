@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2/dist/socket.io.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font: 13px Helvetica, Arial;
+    }
+
+    form {
+      background: #000;
+      padding: 3px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    form input {
+      border: 0;
+      padding: 10px;
+      width: 90%;
+      margin-right: 0.5%;
+    }
+
+    form button {
+      width: 9%;
+      background: rgb(130, 224, 255);
+      border: none;
+      padding: 10px;
+    }
+
+    #messages {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #messages li {
+      padding: 5px 10px;
+    }
+
+    #messages li:nth-child(odd) {
+      background: #eee;
+    }
+  </style>
+
+  <title>Chat Teste</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script>
+    function _onblur() {
+      $('#x').val($('#m').val());
+    }
+
+    $(function () {
+      const socket = io('http://192.168.0.11:21051/');
+      $('form').submit(function (e) {
+        e.preventDefault(); // prevents page reloading
+
+        var msg = [{
+          text: $('#m').val(),
+          user: { _id: '2' /* quem está enviando */ },
+          createdAt: new Date(),
+          _id: Math.round(Math.random() * 1000000),
+          to: '1' // pra quem via a mensagem
+        }]
+
+        socket.emit('infoMessage', msg);
+        $('#messages').append($('<li>').text(msg[0].user._id + ': ' + msg[0].text));
+        $('#m').val('');
+        return false;
+      });
+
+      socket.on('receivedMessage', function (msg) {
+        if (msg[0].to === '2' /* PACIENTE */ && msg[0].user._id === '1' /* USUARIO */)
+          $('#messages').append($('<li>').text(msg[0].user._id + ': ' + msg[0].text));
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <ul id="messages"></ul>
+  <form action="">
+    <input id="x" />
+    <input id="m" autocomplete="off" onblur="_onblur()" /><button>Send</button>
+  </form>
+</body>
+
+</html>
