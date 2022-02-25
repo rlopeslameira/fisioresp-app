@@ -57,6 +57,26 @@ function Home(props) {
     props.navigation.replace('DetalhesPaciente', { paciente });
   }
 
+  async function deletePaciente(paciente){
+    const dados = await api.delete('/paciente', { data: {paciente: paciente.id} });
+    props.navigation.replace('Home');
+  }
+
+  async function removerPaciente(paciente){
+    Alert.alert(
+      "Atenção",
+      `Deseja remover o Paciente (${paciente.name}) ?`,
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Sim", onPress: async () => deletePaciente(paciente)}
+      ]
+    );
+
+  }
 
   return (
     <>
@@ -105,6 +125,17 @@ function Home(props) {
               </TouchableOpacity>
             </View>
 
+            <View style={{height: 25, backgroundColor: "#A52A2A", alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{
+                  flex: 1,
+                  color: '#FFF',
+                  fontSize: 12,    
+                  textAlignVertical: 'center'              
+                }}>
+                Para remover um paciente prescione por 2 segundos.
+              </Text>
+            </View>
+
             <View style={styles.content}>
               {!pacientes ? (
                 <Text>Nenhum registro encontrado.</Text>
@@ -114,7 +145,7 @@ function Home(props) {
                     data={pacientes}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => (
-                      <TouchableOpacity style={styles.itemLista} onPress={() => abreDetalhes(item)}>
+                      <TouchableOpacity style={styles.itemLista} onPress={() => abreDetalhes(item)} onLongPress={() => removerPaciente(item)}>
                         <Image
                           source={{ uri: item.imagem }}
                           style={{

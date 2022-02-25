@@ -81,6 +81,29 @@ $app->post('/paciente', function (Request $request, Response $response, array $a
   }
 });
 
+
+$app->delete('/paciente', function (Request $request, Response $response, array $args) {  
+  
+  $params = $request->getQueryParams();
+  $dados = $request->getParsedBody();
+
+  $sql = " delete from paciente where id = ".$dados["paciente"];	
+
+  try{
+    
+    $bd = new db();
+    $conn = $bd->connect();
+    $resultado = $conn->query($sql);
+    
+    $conn = null;
+
+    echo json_encode($dados);
+  } catch (Exception $err){
+    echo json_encode($err);
+  }
+});
+
+
 $app->put('/paciente', function (Request $request, Response $response, array $args) {  
   
   $params = $request->getQueryParams();
